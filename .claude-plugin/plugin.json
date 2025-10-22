@@ -1,0 +1,9 @@
+{
+  "config": {
+    "memoryDir": ".claude-memory",
+    "memoryBankDir": "memory-bank",
+    "sessionExpiryHours": 24,
+    "maxRecentChanges": 20,
+    "autoArchiveOnExit": true
+  }
+}
