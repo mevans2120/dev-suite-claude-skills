@@ -13,7 +13,7 @@ This skill suite provides four specialized skills that work together to enable h
 
 ## Skills
 
-### 1. Product Research (`dev-research/`)
+### 1. Product Research (`product-research/`)
 
 Conducts comprehensive research activities including:
 - Market and competitive analysis
@@ -23,9 +23,9 @@ Conducts comprehensive research activities including:
 
 **Use when:** Starting a new project, evaluating technologies, or conducting market research
 
-[View Full Documentation](dev-research/SKILL.md)
+[View Full Documentation](product-research/SKILL.md)
 
-### 2. Technical Architecture (`dev-planning/`)
+### 2. Technical Architecture (`technical-architecture/`)
 
 Provides architectural guidance optimized for AI-driven development:
 - System architecture design and analysis
@@ -36,9 +36,9 @@ Provides architectural guidance optimized for AI-driven development:
 
 **Use when:** Designing new systems, analyzing existing architecture, or making technology decisions
 
-[View Full Documentation](dev-planning/SKILL.md)
+[View Full Documentation](technical-architecture/SKILL.md)
 
-### 3. Software Development (`dev-coding/`)
+### 3. Software Development (`software-development/`)
 
 Implements features and applications following best practices:
 - React/TypeScript frontend development
@@ -49,9 +49,9 @@ Implements features and applications following best practices:
 
 **Use when:** Building features, refactoring code, or implementing specifications
 
-[View Full Documentation](dev-coding/SKILL.md)
+[View Full Documentation](software-development/SKILL.md)
 
-### 4. Quality Engineering (`dev-qe/`)
+### 4. Quality Engineering (`quality-engineering/`)
 
 Ensures quality through comprehensive testing:
 - Test strategy development
@@ -62,7 +62,7 @@ Ensures quality through comprehensive testing:
 
 **Use when:** Writing tests, analyzing coverage, or developing testing strategy
 
-[View Full Documentation](dev-qe/SKILL.md)
+[View Full Documentation](quality-engineering/SKILL.md)
 
 ## Technology Stack
 
@@ -96,35 +96,40 @@ These skills are optimized for the following modern, AI-friendly technology stac
 
 ## Installation
 
-### Option 1: Upload to Claude.ai
+**Quick Install:**
+1. Download/clone this repository
+2. Run `./scripts/validate-skills.sh` to verify
+3. Follow platform-specific instructions below
 
-1. Download or clone this repository
-2. Zip the entire `dev-suite-claude-skills` folder
-3. In Claude.ai, click the skills icon
-4. Upload the skill suite
-5. The skills will be available automatically when relevant
+**Detailed Instructions:** See [INSTALL.md](INSTALL.md) for complete installation guide.
 
-### Option 2: Use with Claude Code
+### Option 1: Claude.ai Web/Desktop (Easiest)
 
 ```bash
-# Install as a plugin
-/plugin add /path/to/dev-suite-claude-skills
+# Create ZIP file
+zip -r dev-suite-skills.zip . -x "*.git*" -x ".claude-memory/*"
 
-# Or install from GitHub (if hosted)
-/plugin marketplace add mevans2120/dev-suite-claude-skills
-/plugin install dev-suite-claude-skills@dev-suite-marketplace
+# Upload via Claude.ai Skills interface
 ```
 
-### Option 3: Use via API
+### Option 2: Claude Code CLI
 
-```python
-import anthropic
+```bash
+# As plugin (available across all projects)
+claude plugin add /path/to/dev-suite-claude-skills
 
-client = anthropic.Client(api_key="your-api-key")
+# As project skills (specific project)
+cp -r /path/to/dev-suite-claude-skills/* .claude/skills/
 
-# Skills will be automatically loaded when using the API
-# if they're uploaded to your account
+# As personal skills (all your projects)
+cp -r /path/to/dev-suite-claude-skills/* ~/.claude/skills/
 ```
+
+### Option 3: API Usage
+
+Skills uploaded to your Claude.ai account are automatically available in API calls.
+
+**For complete installation instructions and troubleshooting, see [INSTALL.md](INSTALL.md).**
 
 ## Usage Examples
 
@@ -380,16 +385,16 @@ You can customize these skills for your organization by:
 
 ```
 dev-suite-claude-skills/
-├── README.md                 # This file
-├── QUICK-START.md           # Quick start guide
-├── dev-research/
-│   └── SKILL.md             # Product research skill
-├── dev-planning/
-│   └── SKILL.md             # Technical architecture skill
-├── dev-coding/
-│   └── SKILL.md             # Software development skill
-└── dev-qe/
-    └── SKILL.md             # Quality engineering skill
+├── README.md                      # This file
+├── QUICK-START.md                # Quick start guide
+├── product-research/
+│   └── SKILL.md                  # Product research skill
+├── technical-architecture/
+│   └── SKILL.md                  # Technical architecture skill
+├── software-development/
+│   └── SKILL.md                  # Software development skill
+└── quality-engineering/
+    └── SKILL.md                  # Quality engineering skill
 ```
 
 ## Requirements
@@ -399,20 +404,35 @@ dev-suite-claude-skills/
 - For development: Node.js 18+, npm/pnpm
 - For testing: Playwright installed for E2E tests
 
+## Testing & Validation
+
+Before using the skills, validate they're properly formatted:
+
+```bash
+./scripts/validate-skills.sh
+```
+
+**Expected:** All 49 checks should pass.
+
+**For comprehensive testing procedures, see [TESTING.md](TESTING.md).**
+
 ## Support & Contributing
 
 ### Issues
-If you encounter issues or have suggestions, please:
-1. Check the individual skill documentation
-2. Review the examples in this README
-3. Ensure you're using a compatible Claude version
+If you encounter issues or have suggestions:
+1. Review [INSTALL.md](INSTALL.md) for installation help
+2. Check [TESTING.md](TESTING.md) for troubleshooting
+3. Run `./scripts/validate-skills.sh` to verify setup
+4. Check the individual skill documentation
+5. Open an issue on GitHub with details
 
 ### Contributing
 To contribute improvements:
 1. Fork the repository
 2. Make your changes
-3. Test with Claude
-4. Submit a pull request with clear description
+3. Run `./scripts/validate-skills.sh` to validate
+4. Test with Claude
+5. Submit a pull request with clear description
 
 ## Version History
 
