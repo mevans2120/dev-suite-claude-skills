@@ -975,6 +975,466 @@ it('should do something', () => {
 - Reduce flaky test count from 3 to 0
 ```
 
+## Quality Engineering Documentation
+
+### Creating Documentation Files
+
+**Always create markdown files for QE deliverables:**
+
+**File Naming Convention:**
+- `test-strategy-[project]-[YYYY-MM-DD].md` - Test strategy documents
+- `test-plan-[feature]-[YYYY-MM-DD].md` - Feature test plans
+- `coverage-report-[YYYY-MM-DD].md` - Coverage analysis reports
+- `test-improvements-[YYYY-MM-DD].md` - Test improvement recommendations
+- `qa-findings-[feature]-[YYYY-MM-DD].md` - QA findings and issues
+- `test-review-[sprint]-[YYYY-MM-DD].md` - Test suite review
+
+**Recommended Location:**
+- `docs/testing/` - Main testing documentation
+- `docs/testing/strategies/` - Test strategies
+- `docs/testing/reports/` - Coverage and quality reports
+- `docs/testing/plans/` - Test plans
+
+**Test Strategy Template:**
+```markdown
+# Test Strategy - [Project Name]
+
+**Date:** YYYY-MM-DD
+**Version:** 1.0
+**QE Lead:** [Name/AI]
+**Status:** Draft | Approved | Active
+
+## Executive Summary
+[2-3 paragraphs describing testing approach, goals, and current state]
+
+## Testing Objectives
+- [Objective 1: e.g., Ensure critical paths are tested]
+- [Objective 2: e.g., Achieve 85% code coverage]
+- [Objective 3: e.g., Reduce production bugs by 50%]
+
+## Scope
+
+### In Scope
+- [Feature area 1]
+- [Feature area 2]
+
+### Out of Scope
+- [Excluded area 1]
+- [Excluded area 2]
+
+## Testing Levels
+
+### Unit Testing
+- **Tool:** Jest / Vitest
+- **Coverage Goal:** 90%
+- **Responsibility:** Developers
+- **Scope:** Business logic, utilities, hooks, pure functions
+
+### Integration Testing
+- **Tool:** Jest + Testing Library
+- **Coverage Goal:** 80%
+- **Responsibility:** Developers + QE
+- **Scope:** API routes, database operations, component integration
+
+### End-to-End Testing
+- **Tool:** Playwright
+- **Coverage Goal:** All critical paths + major features
+- **Responsibility:** QE
+- **Scope:** Complete user journeys
+
+## Critical User Paths
+
+### P0 Paths (Must Test)
+1. **User Authentication**
+   - Registration
+   - Login
+   - Password reset
+   - Logout
+
+2. **[Core Feature]**
+   - [Key workflow 1]
+   - [Key workflow 2]
+
+### P1 Paths (Should Test)
+1. **[Important Feature]**
+   - [Workflow]
+
+## Risk Assessment
+
+| Risk Area | Impact | Likelihood | Coverage | Priority |
+|-----------|--------|------------|----------|----------|
+| Payment Processing | High | Medium | 95% | P0 |
+| User Data | High | Low | 85% | P0 |
+| [Feature] | Medium | Medium | 70% | P1 |
+
+## Test Priorities
+
+### Sprint 1
+- [ ] Set up test infrastructure
+- [ ] Create test for authentication flow
+- [ ] Unit tests for core utilities
+
+### Sprint 2
+- [ ] E2E tests for critical paths
+- [ ] Integration tests for API endpoints
+- [ ] Coverage analysis and gap identification
+
+### Sprint 3
+- [ ] Address coverage gaps
+- [ ] Performance testing
+- [ ] Accessibility testing
+
+## Coverage Goals
+
+| Area | Current | Target | Timeline |
+|------|---------|--------|----------|
+| Overall | 65% | 85% | End of Q2 |
+| Critical Paths | 80% | 100% | End of Sprint 2 |
+| Utilities | 85% | 100% | End of Sprint 1 |
+| Components | 60% | 75% | End of Q2 |
+
+## Test Data Strategy
+- **Test Database:** [Approach - in-memory, dedicated test DB]
+- **Fixtures:** [Location and management]
+- **Factories:** [Test data generation approach]
+- **Mocking:** [What gets mocked, what doesn't]
+
+## CI/CD Integration
+
+### Continuous Integration
+- Unit + integration tests run on every PR
+- Tests must pass before merge
+- Coverage reports generated automatically
+
+### Continuous Deployment
+- E2E tests run on staging deployment
+- Smoke tests run on production deployment
+- Rollback triggered on test failures
+
+## Quality Metrics
+
+### Track Weekly
+- Test count (unit, integration, E2E)
+- Code coverage %
+- Test execution time
+- Flaky test count
+- Test pass rate
+
+### Track Monthly
+- Bugs found in testing vs. production
+- Bug severity distribution
+- Time to fix bugs
+- Regression rate
+
+## Tools & Infrastructure
+
+### Testing Framework
+- **Unit/Integration:** Jest 29+
+- **E2E:** Playwright 1.40+
+- **Assertions:** Jest matchers + Testing Library
+- **Mocking:** Jest mocks
+
+### CI/CD
+- **Platform:** GitHub Actions
+- **Test Runner:** GitHub-hosted runners
+- **Reporting:** Codecov, GitHub PR comments
+
+### Monitoring
+- **Error Tracking:** Sentry
+- **Analytics:** PostHog
+- **Performance:** Vercel Analytics
+
+## Team Responsibilities
+
+### Developers
+- Write unit tests for all new code
+- Write integration tests for APIs
+- Fix failing tests
+- Maintain test quality
+
+### QE
+- Define test strategy
+- Write E2E tests
+- Analyze coverage gaps
+- Prioritize testing efforts
+- Review test quality
+
+## Risks & Mitigation
+
+| Risk | Impact | Mitigation |
+|------|--------|------------|
+| Flaky E2E tests | Development slowdown | Strict flaky test policy |
+| Low test coverage | Production bugs | Enforce coverage thresholds |
+| Slow test execution | Slow feedback | Parallelize tests, optimize |
+
+## Success Criteria
+- [ ] 85% overall code coverage
+- [ ] 100% critical path coverage
+- [ ] All P0 paths have E2E tests
+- [ ] Zero flaky tests
+- [ ] Tests run in <5 minutes
+- [ ] <5 production bugs per release
+
+## References
+- [Architecture documentation]
+- [Feature specifications]
+- [CI/CD setup]
+```
+
+**Coverage Analysis Report Template:**
+```markdown
+# Test Coverage Analysis - [Date]
+
+**Analysis Date:** YYYY-MM-DD
+**Project:** [Project Name]
+**Analyzed By:** [Name/AI]
+
+## Executive Summary
+
+**Overall Coverage:** X% (↑/↓ Y% from last report)
+**Status:** 🟢 On Track | 🟡 Needs Attention | 🔴 Critical
+
+Key Findings:
+- [Finding 1]
+- [Finding 2]
+- [Finding 3]
+
+## Coverage Metrics
+
+### Overall Coverage
+| Metric | Current | Target | Status |
+|--------|---------|--------|--------|
+| Statements | X% | 85% | 🟢 |
+| Branches | X% | 80% | 🟡 |
+| Functions | X% | 90% | 🔴 |
+| Lines | X% | 85% | 🟢 |
+
+### Coverage by Module
+| Module | Statements | Branches | Functions | Lines | Priority |
+|--------|-----------|----------|-----------|-------|----------|
+| Auth | 100% | 95% | 100% | 100% | P0 |
+| Users | 85% | 80% | 90% | 85% | P0 |
+| Tasks | 70% | 65% | 75% | 70% | P1 |
+| Notifications | 45% | 40% | 50% | 45% | P1 |
+
+## Critical Coverage Gaps
+
+### 🔴 Priority 1 (Critical)
+**Notification Service** - 45% coverage
+- **Risk:** High - handles critical user communications
+- **Missing:** Error handling, retry logic, edge cases
+- **Uncovered Files:**
+  - \`lib/notifications/email.ts\` (30% coverage)
+  - \`lib/notifications/push.ts\` (25% coverage)
+- **Recommendation:** Add 12 unit tests + 2 integration tests
+- **Effort:** 2-3 days
+- **Assigned:** [Name]
+
+### 🟡 Priority 2 (Important)
+**Search Feature** - 70% coverage
+- **Risk:** Medium - core feature but lower impact
+- **Missing:** Complex query tests, filter combinations
+- **Uncovered Files:**
+  - \`lib/search/filters.ts\` (65% coverage)
+- **Recommendation:** Add 6 unit tests
+- **Effort:** 1 day
+
+## Test Suite Health
+
+### Test Statistics
+- **Total Tests:** X
+  - Unit: X (Y%)
+  - Integration: X (Y%)
+  - E2E: X (Y%)
+- **Execution Time:** X minutes
+- **Flaky Tests:** X (target: 0)
+- **Skipped Tests:** X
+
+### Flaky Tests
+1. **\`e2e/checkout.spec.ts\`** - Fails intermittently on slow networks
+   - Status: Under investigation
+   - Action: Add retry logic + timeout increase
+
+2. **\`components/Modal.test.tsx\`** - Race condition with animations
+   - Status: Fix in progress
+   - Action: Use waitFor with proper timing
+
+## Recommended Actions
+
+### This Sprint
+1. **Fix Critical Gaps**
+   - [ ] Add tests for notification service (Priority 1)
+   - [ ] Fix 2 flaky E2E tests
+   - [ ] Review auth module (maintain 100%)
+
+2. **Technical Debt**
+   - [ ] Refactor slow test suite in \`api/users\`
+   - [ ] Update test fixtures to latest schema
+   - [ ] Add missing JSDoc for test utilities
+
+### Next Sprint
+1. **Improve Coverage**
+   - [ ] Add tests for search feature (Priority 2)
+   - [ ] Increase branch coverage in task module
+   - [ ] Add E2E test for new collaboration feature
+
+2. **Quality Improvements**
+   - [ ] Implement test data factories
+   - [ ] Add coverage trend tracking
+   - [ ] Document testing patterns
+
+## Coverage Trends
+
+### Last 4 Weeks
+| Week | Overall | Critical Paths | Change |
+|------|---------|----------------|--------|
+| Week 1 | 78% | 92% | - |
+| Week 2 | 80% | 95% | +2% |
+| Week 3 | 81% | 95% | +1% |
+| Week 4 | 82% | 95% | +1% |
+
+**Trend:** 🟢 Steady improvement
+
+## Risk Assessment
+
+| Risk | Likelihood | Impact | Action Required |
+|------|-----------|--------|-----------------|
+| Notification failures | High | High | Add tests immediately |
+| Search bugs | Medium | Medium | Add tests next sprint |
+| Auth vulnerabilities | Low | Critical | Maintain 100% coverage |
+
+## Files Requiring Attention
+
+### No Test Coverage (0%)
+- None ✅
+
+### Low Coverage (<50%)
+1. \`lib/notifications/push.ts\` (25%)
+2. \`lib/analytics/tracking.ts\` (40%)
+3. \`lib/utils/legacy.ts\` (35%)
+
+### High Complexity, Low Coverage
+1. \`lib/search/query-builder.ts\` (60% coverage, complexity: 15)
+2. \`lib/payments/processor.ts\` (75% coverage, complexity: 12)
+
+## Next Review
+**Date:** [Next review date]
+**Focus Areas:** Notification service, flaky tests, search feature
+
+## Appendix
+
+### Coverage Command
+\`\`\`bash
+npm run test -- --coverage --coverageReporters=text,lcov,html
+\`\`\`
+
+### Detailed Reports
+- HTML Report: \`coverage/lcov-report/index.html\`
+- LCOV File: \`coverage/lcov.info\`
+```
+
+**Test Improvement Recommendations Template:**
+```markdown
+# Test Improvement Recommendations
+
+**Date:** YYYY-MM-DD
+**Project:** [Project Name]
+**Reviewed By:** [Name/AI]
+
+## Overview
+[Summary of test suite review and key findings]
+
+## Current State
+
+### Strengths
+- [What's working well]
+- [What's working well]
+
+### Weaknesses
+- [What needs improvement]
+- [What needs improvement]
+
+## Prioritized Recommendations
+
+### 🔴 High Priority (Do Now)
+
+#### 1. Fix Flaky Tests
+**Issue:** 3 E2E tests fail intermittently
+**Impact:** Blocks deployments, reduces confidence
+**Solution:**
+- Add proper wait conditions
+- Increase timeouts where needed
+- Add retry logic for network requests
+**Effort:** 1-2 days
+**Owner:** [Name]
+
+#### 2. Add Tests for Critical Path
+**Issue:** Checkout flow has only 60% coverage
+**Impact:** High risk of production bugs
+**Solution:**
+- Add 5 unit tests for payment validation
+- Add 2 E2E tests for complete checkout
+**Effort:** 2-3 days
+**Owner:** [Name]
+
+### 🟡 Medium Priority (Next Sprint)
+
+#### 3. Improve Test Performance
+**Issue:** Test suite takes 8 minutes to run
+**Impact:** Slow feedback loop
+**Solution:**
+- Parallelize test execution
+- Mock slow external APIs
+- Split large test files
+**Effort:** 3-4 days
+**Owner:** [Name]
+
+### 🟢 Low Priority (Backlog)
+
+#### 4. Add Visual Regression Tests
+**Issue:** UI changes not caught by current tests
+**Impact:** Occasional UI regressions
+**Solution:**
+- Integrate Percy or Chromatic
+- Add visual tests for key pages
+**Effort:** 1 week
+**Owner:** [Name]
+
+## Best Practices to Adopt
+
+1. **Test Data Factories**
+   - Use factories instead of inline test data
+   - Makes tests more maintainable
+
+2. **Shared Test Utilities**
+   - Extract common setup into helpers
+   - Reduces duplication
+
+3. **Better Test Naming**
+   - Use descriptive test names
+   - Follow pattern: "should [expected behavior] when [condition]"
+
+## Success Metrics
+
+### Target for Next Month
+- [ ] All flaky tests fixed
+- [ ] Critical path coverage at 100%
+- [ ] Test execution time under 5 minutes
+- [ ] Zero skipped tests
+
+## References
+- [Coverage report]
+- [CI/CD logs]
+- [Test strategy doc]
+```
+
+**When to Create Files:**
+- Create test strategy at project start or when approach changes
+- Create coverage reports after significant testing work or monthly
+- Create test improvement recommendations after reviews
+- Create test plans for major features
+- Update documentation when test approach evolves
+
 ## Quality Criteria
 
 Testing is complete when:
@@ -986,6 +1446,7 @@ Testing is complete when:
 - ✅ No known flaky tests
 - ✅ Tests are maintainable and clear
 - ✅ CI/CD integration is working
+- ✅ **Test documentation files created and up to date**
 
 ## Notes
 
@@ -995,3 +1456,4 @@ Testing is complete when:
 - Don't chase 100% coverage - focus on valuable tests
 - Good tests enable confident refactoring
 - Balance between test coverage and development velocity
+- **Document test strategies, coverage analysis, and recommendations in markdown files**

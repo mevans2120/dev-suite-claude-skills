@@ -468,6 +468,176 @@ Negative:
 - Vendor-specific patterns
 ```
 
+### Creating Architecture Documentation Files
+
+**Always create markdown files for architecture work:**
+
+**File Naming Convention:**
+- `architecture-overview-[project]-[YYYY-MM-DD].md` - Main architecture doc
+- `ADR-[number]-[title].md` - Architecture decision records
+- `tech-stack-[project]-[YYYY-MM-DD].md` - Technology stack decisions
+- `system-design-[feature]-[YYYY-MM-DD].md` - Feature-specific designs
+- `architecture-review-[YYYY-MM-DD].md` - Architecture review findings
+
+**Recommended Location:**
+- `docs/architecture/` - Main architecture documentation
+- `docs/architecture/adrs/` - Architecture Decision Records
+- `docs/architecture/diagrams/` - Architecture diagrams
+- `docs/decisions/` - Cross-functional decisions
+
+**Architecture Overview Template:**
+```markdown
+# [Project Name] - Architecture Overview
+
+**Date:** YYYY-MM-DD
+**Version:** 1.0
+**Status:** Proposed | Approved | Implemented
+
+## Executive Summary
+[2-3 paragraphs describing the architecture at a high level]
+
+## System Context
+- **Business Goals:** [What are we trying to achieve]
+- **Users:** [Who will use this system]
+- **Constraints:** [Technical, business, or regulatory constraints]
+
+## Architecture Decisions
+
+### Technology Stack
+- **Frontend:** [Framework, libraries]
+- **Backend:** [Framework, services]
+- **Database:** [Type, provider]
+- **Infrastructure:** [Hosting, deployment]
+- **Rationale:** [Why these choices]
+
+### Architecture Pattern
+[Monolith, Microservices, Serverless, Event-Driven, etc.]
+
+**Rationale:** [Why this pattern was chosen]
+
+## System Components
+
+### High-Level Diagram
+\`\`\`mermaid
+graph TB
+    Client[Client Application]
+    API[API Layer]
+    DB[(Database)]
+
+    Client --> API
+    API --> DB
+\`\`\`
+
+### Component Details
+1. **[Component Name]**
+   - Purpose: [What it does]
+   - Technology: [What it's built with]
+   - Dependencies: [What it depends on]
+
+## Data Architecture
+- **Data Model:** [Overview of data structure]
+- **Data Flow:** [How data moves through the system]
+- **Storage Strategy:** [Database choices, caching]
+
+## Security Architecture
+- **Authentication:** [How users authenticate]
+- **Authorization:** [How access is controlled]
+- **Data Protection:** [Encryption, security measures]
+- **Security Best Practices:** [What we're following]
+
+## Scalability Strategy
+- **Current Scale:** [Expected initial load]
+- **Future Scale:** [Growth projections]
+- **Scaling Approach:** [Horizontal, vertical, auto-scaling]
+- **Bottlenecks:** [Identified potential bottlenecks]
+
+## Integration Points
+- **External APIs:** [Third-party services]
+- **Internal Services:** [Other systems]
+- **Data Sync:** [How data is synchronized]
+
+## Deployment Architecture
+- **Environments:** [Dev, staging, production]
+- **CI/CD:** [Deployment pipeline]
+- **Monitoring:** [How we monitor the system]
+
+## Trade-offs & Risks
+| Decision | Pro | Con | Risk | Mitigation |
+|----------|-----|-----|------|------------|
+| ...      | ... | ... | ...  | ...        |
+
+## Open Questions
+- [ ] [Question requiring resolution]
+- [ ] [Question requiring resolution]
+
+## Next Steps
+1. [Actionable next step]
+2. [Actionable next step]
+
+## References
+- [ADR-001: Key Decision]
+- [External documentation]
+- [Research findings]
+```
+
+**ADR Template:**
+```markdown
+# ADR-[Number]: [Title]
+
+**Date:** YYYY-MM-DD
+**Status:** Proposed | Accepted | Deprecated | Superseded by ADR-XXX
+**Deciders:** [Names/Roles]
+
+## Context
+[What is the issue or problem we're trying to solve? What factors are influencing this decision?]
+
+## Decision
+[What is the change that we're proposing and/or doing?]
+
+## Alternatives Considered
+
+### Option 1: [Name]
+**Pros:**
+- [Advantage]
+
+**Cons:**
+- [Disadvantage]
+
+### Option 2: [Name]
+**Pros:**
+- [Advantage]
+
+**Cons:**
+- [Disadvantage]
+
+## Consequences
+
+### Positive
+- [Positive consequence]
+- [Positive consequence]
+
+### Negative
+- [Negative consequence]
+- [Negative consequence]
+
+### Neutral
+- [Neutral consequence]
+
+## Implementation Notes
+[Any specific notes about implementing this decision]
+
+## Related
+- [Link to related ADRs]
+- [Link to relevant documentation]
+```
+
+**When to Create Files:**
+- Create architecture overview at project start
+- Create ADR for every significant architectural decision
+- Update architecture docs when system changes
+- Create review documents after architecture reviews
+- Document tech stack decisions with rationale
+
 ## Integration with Development Suite
 
 ### From Research Skill

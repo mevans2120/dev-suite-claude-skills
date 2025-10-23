@@ -251,6 +251,74 @@ Output: Feasibility assessment, implementation approach, risk analysis
 - Links to sources and references
 - Next steps and open questions
 
+### Creating Documentation Files
+
+**Always create markdown files for research deliverables:**
+
+**File Naming Convention:**
+- `research-[topic]-[YYYY-MM-DD].md` for general research
+- `competitive-analysis-[product]-[YYYY-MM-DD].md` for competitor analysis
+- `tech-evaluation-[technology]-[YYYY-MM-DD].md` for technology assessments
+- `market-research-[domain]-[YYYY-MM-DD].md` for market analysis
+
+**Recommended Location:**
+- `docs/research/` - For all research documentation
+- `docs/decisions/` - For research-backed decisions
+
+**File Structure Template:**
+```markdown
+# [Research Title]
+
+**Date:** YYYY-MM-DD
+**Researcher:** [Name/AI]
+**Status:** Draft | Final | Archived
+
+## Executive Summary
+[2-3 paragraphs summarizing key findings]
+
+## Objectives
+- [Research question 1]
+- [Research question 2]
+
+## Methodology
+[How research was conducted, sources used]
+
+## Findings
+
+### [Category 1]
+[Detailed findings...]
+
+### [Category 2]
+[Detailed findings...]
+
+## Competitive Analysis
+| Competitor | Strengths | Weaknesses | Key Features |
+|------------|-----------|------------|--------------|
+| ...        | ...       | ...        | ...          |
+
+## Recommendations
+1. **[Priority]** [Recommendation with rationale]
+2. **[Priority]** [Recommendation with rationale]
+
+## Risks & Considerations
+- [Risk or consideration]
+- [Risk or consideration]
+
+## Next Steps
+- [ ] [Actionable next step]
+- [ ] [Actionable next step]
+
+## References
+- [Source 1]
+- [Source 2]
+```
+
+**When to Create Files:**
+- Always create for completed research projects
+- Create after significant discovery sessions
+- Update existing files when new information emerges
+- Create summary files for multi-day research efforts
+
 ## Quality Criteria
 
 Research is complete when:

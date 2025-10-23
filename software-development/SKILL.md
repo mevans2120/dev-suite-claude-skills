@@ -976,6 +976,257 @@ When requirements are unclear, ask:
 - ❌ Leave TODO comments without tickets
 - ❌ Push breaking changes without communication
 
+## Development Documentation
+
+### Creating Documentation Files
+
+**Always create markdown files for significant development work:**
+
+**File Naming Convention:**
+- `feature-[name]-[YYYY-MM-DD].md` - Feature implementation docs
+- `refactor-[component]-[YYYY-MM-DD].md` - Refactoring documentation
+- `bug-fix-[issue-number]-[YYYY-MM-DD].md` - Bug fix documentation
+- `implementation-notes-[feature]-[YYYY-MM-DD].md` - Implementation details
+- `code-review-[feature]-[YYYY-MM-DD].md` - Code review findings
+
+**Recommended Location:**
+- `docs/development/` - Development documentation
+- `docs/features/` - Feature-specific documentation
+- `docs/api/` - API implementation docs
+- `.github/docs/` - GitHub-visible documentation
+
+**Feature Implementation Template:**
+```markdown
+# [Feature Name] - Implementation
+
+**Date:** YYYY-MM-DD
+**Developer:** [Name/AI]
+**Status:** In Progress | Completed | Blocked
+**Related:** [Links to tickets, PRs, designs]
+
+## Overview
+[Brief description of the feature and its purpose]
+
+## Requirements
+- [Requirement 1]
+- [Requirement 2]
+- [Requirement 3]
+
+## Technical Approach
+
+### Architecture
+[How the feature fits into the existing architecture]
+
+### Components
+1. **[Component Name]** (`path/to/component.tsx`)
+   - Purpose: [What it does]
+   - Props: [Key props]
+   - State: [Key state]
+
+2. **[API Route]** (`path/to/route.ts`)
+   - Endpoint: `POST /api/...`
+   - Purpose: [What it does]
+   - Validation: [Schema used]
+
+### Database Changes
+\`\`\`prisma
+model NewModel {
+  id        String   @id @default(cuid())
+  // ...
+}
+\`\`\`
+
+### API Contracts
+\`\`\`typescript
+// Request
+interface CreateRequest {
+  name: string;
+  // ...
+}
+
+// Response
+interface CreateResponse {
+  id: string;
+  // ...
+}
+\`\`\`
+
+## Implementation Details
+
+### Key Files Changed
+- \`app/[feature]/page.tsx\` - Main feature page
+- \`components/[Feature]/[Component].tsx\` - Feature components
+- \`lib/api/[feature].ts\` - API client functions
+- \`app/api/[feature]/route.ts\` - API endpoints
+
+### Code Examples
+\`\`\`typescript
+// Key implementation snippet
+export function FeatureComponent() {
+  // ...
+}
+\`\`\`
+
+### Edge Cases Handled
+- [Edge case 1 and how it's handled]
+- [Edge case 2 and how it's handled]
+
+### Error Handling
+- [Error scenario and handling approach]
+- [Error scenario and handling approach]
+
+## Testing
+
+### Test Coverage
+- ✅ Unit tests for business logic
+- ✅ Integration tests for API endpoints
+- ✅ Component tests for UI
+- ✅ E2E test for critical path
+
+### Test Files
+- \`components/[Feature]/[Component].test.tsx\`
+- \`app/api/[feature]/route.test.ts\`
+- \`e2e/[feature].spec.ts\`
+
+## Known Limitations
+- [Limitation 1]
+- [Limitation 2]
+
+## Future Improvements
+- [ ] [Potential improvement]
+- [ ] [Potential improvement]
+
+## Lessons Learned
+- [Something learned during implementation]
+- [Something learned during implementation]
+
+## References
+- [Design documentation]
+- [Architecture decisions]
+- [Related tickets]
+```
+
+**Refactoring Documentation Template:**
+```markdown
+# Refactor: [Component/Module Name]
+
+**Date:** YYYY-MM-DD
+**Developer:** [Name/AI]
+**Reason:** [Why refactoring was needed]
+
+## Before
+
+### Issues
+- [Problem 1]
+- [Problem 2]
+- [Problem 3]
+
+### Code Complexity
+- Lines of code: [number]
+- Cyclomatic complexity: [metric if available]
+- Coupling: [description]
+
+## After
+
+### Improvements
+- [Improvement 1]
+- [Improvement 2]
+- [Improvement 3]
+
+### New Structure
+\`\`\`
+/feature
+  /components
+    Component1.tsx
+    Component2.tsx
+  /hooks
+    useFeature.ts
+  /utils
+    helpers.ts
+\`\`\`
+
+### Code Complexity
+- Lines of code: [number] (↓ X%)
+- Cyclomatic complexity: [improved metric]
+- Coupling: [reduced coupling description]
+
+## Migration Guide
+[If other developers need to update their code]
+
+1. Step 1
+2. Step 2
+
+## Testing
+- ✅ All existing tests pass
+- ✅ Added new tests for extracted functions
+- ✅ Code coverage maintained at [X]%
+
+## Performance Impact
+[Any performance improvements or regressions]
+```
+
+**Bug Fix Documentation Template:**
+```markdown
+# Bug Fix: [Issue Number] - [Title]
+
+**Date:** YYYY-MM-DD
+**Developer:** [Name/AI]
+**Severity:** Critical | High | Medium | Low
+**Affected Version:** [Version]
+
+## Bug Description
+[What was the bug and how did it manifest?]
+
+## Root Cause
+[What caused the bug?]
+
+## Fix Applied
+
+### Code Changes
+\`\`\`typescript
+// Before
+function problematicFunction() {
+  // ...
+}
+
+// After
+function fixedFunction() {
+  // ...
+}
+\`\`\`
+
+### Files Changed
+- \`path/to/file1.ts\` - [Description of change]
+- \`path/to/file2.tsx\` - [Description of change]
+
+## Testing
+
+### Manual Testing
+- [x] Verified bug is fixed
+- [x] Tested edge cases
+- [x] Verified no regression
+
+### Automated Tests
+- Added test: \`test/file.test.ts\`
+- Test verifies: [What the test checks]
+
+## Prevention
+[How to prevent similar bugs in the future]
+- [Prevention measure 1]
+- [Prevention measure 2]
+
+## Related Issues
+- [Link to original issue]
+- [Link to related bugs]
+```
+
+**When to Create Files:**
+- Create feature docs when implementing significant features
+- Create refactoring docs when restructuring code
+- Create bug fix docs for critical or complex bugs
+- Create implementation notes for architectural components
+- Update existing docs when making major changes
+
 ## Quality Criteria
 
 Development is complete when:
@@ -985,7 +1236,7 @@ Development is complete when:
 - ✅ No TypeScript errors
 - ✅ Error handling is comprehensive
 - ✅ Code is reviewed and refactored
-- ✅ Documentation is updated
+- ✅ **Documentation files created for significant work**
 - ✅ Ready for QE testing
 
 ## Notes
@@ -995,3 +1246,4 @@ Development is complete when:
 - Don't abstract too early - wait for patterns to emerge
 - Tests are documentation - make them clear
 - When in doubt, keep it simple
+- **Document significant decisions and implementations in markdown files**
