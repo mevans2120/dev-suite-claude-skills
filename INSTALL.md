@@ -196,6 +196,65 @@ ls -la .claude/skills/
 
 If using Claude via API, skills must be uploaded to your account via Claude.ai first (see Option 1), then they'll automatically be available in API calls.
 
+---
+
+## Install the Complete Ecosystem (Optional)
+
+This Development Suite is one of three complementary skill suites. For the complete product development experience:
+
+| Suite | Skills | Repository |
+|-------|--------|------------|
+| 🎨 Design | 4 skills (UI/UX, Design Systems) | [design-suite-claude-skills](https://github.com/mevans2120/design-suite-claude-skills) |
+| 📋 Project | 3 skills (Planning, Management) | [project-suite-claude-skills](https://github.com/mevans2120/project-suite-claude-skills) |
+| 💻 Development | 4 skills (this repo) | [dev-suite-claude-skills](https://github.com/mevans2120/dev-suite-claude-skills) |
+
+**Install all three (11 total skills):**
+
+```bash
+# 1. Clone all repositories
+git clone https://github.com/mevans2120/design-suite-claude-skills.git
+git clone https://github.com/mevans2120/project-suite-claude-skills.git
+git clone https://github.com/mevans2120/dev-suite-claude-skills.git
+
+# 2. Validate each
+cd design-suite-claude-skills && ./scripts/validate-skills.sh && cd ..
+cd project-suite-claude-skills && ./scripts/validate-skills.sh && cd ..
+cd dev-suite-claude-skills && ./scripts/validate-skills.sh && cd ..
+
+# 3. Install all globally
+mkdir -p ~/.claude/skills
+
+# Design Suite
+cd design-suite-claude-skills
+for skill in design-*; do ln -s "$(pwd)/$skill" ~/.claude/skills/$skill; done
+cd ..
+
+# Project Suite
+cd project-suite-claude-skills
+for skill in project-*; do ln -s "$(pwd)/$skill" ~/.claude/skills/$skill; done
+cd ..
+
+# Development Suite
+cd dev-suite-claude-skills
+ln -s "$(pwd)/product-research" ~/.claude/skills/product-research
+ln -s "$(pwd)/technical-architecture" ~/.claude/skills/technical-architecture
+ln -s "$(pwd)/software-development" ~/.claude/skills/software-development
+ln -s "$(pwd)/quality-engineering" ~/.claude/skills/quality-engineering
+cd ..
+
+# 4. Verify all 11 skills
+ls -la ~/.claude/skills/ | wc -l
+# Should show 11+ lines (11 skills + directory entries)
+```
+
+**Benefits of complete ecosystem:**
+- 🎨 Design skills for UI/UX
+- 📋 Project skills for planning & coordination
+- 💻 Development skills for implementation & testing
+- 🚀 Complete product lifecycle coverage
+
+**See README for detailed ecosystem integration examples.**
+
 ```python
 import anthropic
 
