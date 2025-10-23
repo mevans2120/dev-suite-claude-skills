@@ -87,17 +87,17 @@ version: 1.0.0
 ## Installation Locations
 
 ### Development
-`/Users/michaelevans/dev-suite-claude-skills/`
+`/path/to/dev-suite-claude-skills/`
 - Source repository
 - Git-tracked
 - Where updates are made
 
 ### Global Installation (Symlinked)
 `~/.claude/skills/`
-- product-research → dev-suite-claude-skills/product-research
-- technical-architecture → dev-suite-claude-skills/technical-architecture
-- software-development → dev-suite-claude-skills/software-development
-- quality-engineering → dev-suite-claude-skills/quality-engineering
+- product-research → /path/to/dev-suite-claude-skills/product-research
+- technical-architecture → /path/to/dev-suite-claude-skills/technical-architecture
+- software-development → /path/to/dev-suite-claude-skills/software-development
+- quality-engineering → /path/to/dev-suite-claude-skills/quality-engineering
 
 **Benefit**: Changes in repo automatically reflected globally
 

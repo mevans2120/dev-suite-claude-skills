@@ -1,37 +1,75 @@
 # Quick Start Guide - Digital Product Development Skill Suite
 
+**Get up and running in 5 minutes!**
+
+## What This Is
+
+4 expert skills that help you build digital products with AI assistance:
+- 🔍 Research (market analysis, tech evaluation)
+- 🏗️ Architecture (system design, tech decisions)
+- 💻 Development (React/TypeScript/Next.js/Python)
+- ✅ QE (testing strategy, coverage analysis)
+
 ## Installation (3 Easy Steps)
 
 ### Step 1: Download
-You have two files in your outputs folder:
-- `dev-suite.zip` - Compressed skill suite (easiest to upload)
-- `dev-suite/` - Individual skill folders
-
-### Step 2: Upload to Claude
-
-#### For Claude.ai (Web/Desktop):
-1. Open Claude.ai
-2. Click the **Skills** icon (puzzle piece) in the left sidebar
-3. Click **Upload Skill**
-4. Select `dev-suite.zip` from your downloads
-5. Wait for upload to complete
-6. Skills are now available!
-
-#### For Claude Code (CLI):
 ```bash
-# Navigate to the dev-suite folder
-cd /path/to/dev-suite
+# Clone the repository
+git clone https://github.com/mevans2120/dev-suite-claude-skills.git
+cd dev-suite-claude-skills
 
-# Install as a plugin
-/plugin add .
-
-# Verify installation
-/help
+# Validate it works
+chmod +x scripts/validate-skills.sh
+./scripts/validate-skills.sh
+# Should see: ✅ All 49 checks passed!
 ```
 
-### Step 3: Start Using
+### Step 2: Install
 
-Just start a conversation! Claude will automatically load the relevant skills based on your request.
+**For Claude.ai Web/Desktop** (Most users):
+```bash
+# Create ZIP
+zip -r dev-suite-skills.zip . -x "*.git*" -x ".claude-memory/session/*"
+
+# Then in Claude.ai:
+# 1. Click Skills icon (🧩)
+# 2. Upload dev-suite-skills.zip
+# 3. Wait ~1 minute
+```
+
+**For Claude Code CLI** (Developers):
+```bash
+# Install globally (all projects)
+mkdir -p ~/.claude/skills
+REPO_PATH="$(pwd)"
+ln -s "$REPO_PATH/product-research" ~/.claude/skills/product-research
+ln -s "$REPO_PATH/technical-architecture" ~/.claude/skills/technical-architecture
+ln -s "$REPO_PATH/software-development" ~/.claude/skills/software-development
+ln -s "$REPO_PATH/quality-engineering" ~/.claude/skills/quality-engineering
+
+# Verify
+ls -la ~/.claude/skills/ | grep dev-suite
+```
+
+### Step 3: Test It!
+
+**Start a new conversation and try:**
+
+```
+"Research the market for task management apps"
+→ Product Research skill activates
+
+"Design architecture for a blog platform"
+→ Technical Architecture skill activates
+
+"Implement user authentication with TypeScript"
+→ Software Development skill activates
+
+"Analyze test coverage and suggest improvements"
+→ Quality Engineering skill activates
+```
+
+**✅ If you see detailed, expert responses, it's working!**
 
 ## Your First Projects
 

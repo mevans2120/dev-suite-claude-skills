@@ -1,96 +1,196 @@
 # Installation Guide - Digital Product Development Skill Suite
 
-Complete installation instructions for using the skill suite with Claude.
+Complete, step-by-step installation instructions for using the skill suite with Claude.
+
+## What You'll Get
+
+After installation, you'll have **4 expert skills** available in Claude:
+- 🔍 **Product Research** - Market analysis & technology evaluation
+- 🏗️ **Technical Architecture** - System design & architecture decisions
+- 💻 **Software Development** - React/TypeScript/Next.js/Python implementation
+- ✅ **Quality Engineering** - Testing strategy & test implementation
 
 ## Prerequisites
 
-- Claude Pro, Max, Team, or Enterprise subscription
-- For Claude Code: Claude Code CLI installed
-- For local testing: Bash shell (macOS/Linux) or Git Bash (Windows)
+**Required:**
+- Claude Pro, Team, or Enterprise subscription
+- 5-10 minutes
 
-## Quick Start
+**Optional (for Claude Code CLI):**
+- Git installed
+- Terminal access (macOS/Linux) or Git Bash (Windows)
 
-### Option 1: Claude.ai Web/Desktop (Easiest)
+## Choose Your Installation Method
 
-**1. Download the skill suite:**
+Pick the option that matches how you use Claude:
+
+| Method | Best For | Difficulty | Time |
+|--------|----------|------------|------|
+| [Option 1](#option-1-claudeai-webdesktop-easiest) | Claude.ai web/desktop users | ⭐ Easiest | 5 min |
+| [Option 2](#option-2-claude-code-cli) | Claude Code CLI users | ⭐⭐ Moderate | 8 min |
+| [Option 3](#option-3-api-usage) | API developers | ⭐ Easy | 5 min |
+
+---
+
+## Option 1: Claude.ai Web/Desktop (Easiest)
+
+**Perfect for:** Most users, especially those using Claude via web browser or desktop app
+
+### Step-by-Step Instructions
+
+**Step 1: Download the skills**
+```bash
+# Option A: Clone with Git (recommended)
+git clone https://github.com/mevans2120/dev-suite-claude-skills.git
+cd dev-suite-claude-skills
+
+# Option B: Download ZIP from GitHub
+# Visit: https://github.com/mevans2120/dev-suite-claude-skills
+# Click: Code → Download ZIP
+# Extract the ZIP file
+# Open terminal in extracted folder
+```
+
+**Step 2: Validate the skills**
+```bash
+# Make the validation script executable
+chmod +x scripts/validate-skills.sh
+
+# Run validation
+./scripts/validate-skills.sh
+
+# You should see:
+# ✅ All 49 checks passed!
+```
+
+**Step 3: Create a distribution ZIP**
+```bash
+# Create ZIP excluding unnecessary files
+zip -r dev-suite-skills.zip . \
+  -x "*.git*" \
+  -x ".claude-memory/session/*" \
+  -x "node_modules/*" \
+  -x ".DS_Store"
+
+# The ZIP will be created in the current directory
+ls -lh dev-suite-skills.zip
+```
+
+**Step 4: Upload to Claude.ai**
+
+1. Open [Claude.ai](https://claude.ai) in your browser (or open the desktop app)
+2. Look for the **Skills** icon in the left sidebar (looks like a puzzle piece 🧩)
+3. Click **"Upload Skill"** or **"Add Skill"**
+4. Browse and select `dev-suite-skills.zip`
+5. Wait for the upload to complete (usually 30-60 seconds)
+6. You'll see a confirmation when it's done
+
+**Step 5: Test it works!**
+- Start a new conversation in Claude
+- Type: **"Research the market for task management apps"**
+- Claude should automatically use the Product Research skill
+- You'll see detailed market analysis in the response
+
+**✅ Done!** The skills are now available in all your Claude.ai conversations.
+
+## Option 2: Claude Code CLI
+
+**Perfect for:** Developers using Claude via command-line interface
+
+### Choose Your Scope
+
+| Scope | When to Use | Command |
+|-------|-------------|---------|
+| **Global** ✅ | Want skills in ALL projects (recommended) | [Method A](#method-a-global-installation-recommended) |
+| **Project** | Want skills in ONE specific project only | [Method B](#method-b-project-specific) |
+
+### Method A: Global Installation (Recommended)
+
+**Makes skills available in all your projects**
+
+**Step 1: Download and validate**
 ```bash
 # Clone the repository
 git clone https://github.com/mevans2120/dev-suite-claude-skills.git
 cd dev-suite-claude-skills
 
-# Or download and extract the ZIP from GitHub
-```
-
-**2. Create a ZIP file (if not already done):**
-```bash
-zip -r dev-suite-skills.zip . \
-  -x "*.git*" \
-  -x ".claude-memory/*" \
-  -x "node_modules/*" \
-  -x ".DS_Store"
-```
-
-**3. Upload to Claude.ai:**
-1. Open Claude.ai in your browser or desktop app
-2. Click the **Skills** icon (puzzle piece) in the left sidebar
-3. Click **Upload Skill** or **Add Skill**
-4. Select `dev-suite-skills.zip`
-5. Wait for upload to complete (may take a minute)
-6. Skills are now available!
-
-**4. Verify installation:**
-- Start a new conversation
-- Try a test prompt (see [Verification](#verification) below)
-- Claude should automatically load the relevant skill
-
-### Option 2: Claude Code CLI
-
-**Method A: Install as Plugin**
-
-```bash
-# Navigate to the skill suite directory
-cd /path/to/dev-suite-claude-skills
-
-# Verify skills are valid
+# Validate
+chmod +x scripts/validate-skills.sh
 ./scripts/validate-skills.sh
-
-# Add as a plugin
-# (This method allows the skills to be available across projects)
-# Note: Adjust command based on Claude Code version
-claude plugin add .
+# Should show: ✅ All 49 checks passed!
 ```
 
-**Method B: Install as Project Skills**
+**Step 2: Create skills directory**
+```bash
+# Create the global skills directory if it doesn't exist
+mkdir -p ~/.claude/skills
+```
+
+**Step 3: Install with symlinks (keeps skills auto-updated)**
+```bash
+# Get the full path to your cloned repository
+REPO_PATH="$(pwd)"
+
+# Create symlinks (this way updates to the repo automatically sync)
+ln -s "$REPO_PATH/product-research" ~/.claude/skills/product-research
+ln -s "$REPO_PATH/technical-architecture" ~/.claude/skills/technical-architecture
+ln -s "$REPO_PATH/software-development" ~/.claude/skills/software-development
+ln -s "$REPO_PATH/quality-engineering" ~/.claude/skills/quality-engineering
+```
+
+**Step 4: Verify installation**
+```bash
+# Check that all 4 skills are linked
+ls -la ~/.claude/skills/ | grep -E "product-research|technical-architecture|software-development|quality-engineering"
+
+# You should see 4 symlinks (arrows →) pointing to your repo
+```
+
+**Step 5: Test it works!**
+```bash
+# Start Claude Code in any project
+cd ~/your-project
+claude
+
+# Then type: "Design architecture for a blog platform"
+# Claude should load the Technical Architecture skill
+```
+
+**✅ Done!** Skills are now available globally across all your projects.
+
+**Benefits of symlinks:**
+- ✅ Updates to the repo automatically available
+- ✅ No file duplication
+- ✅ Easy to manage (one copy, many uses)
+
+---
+
+### Method B: Project-Specific
+
+**Makes skills available in ONE project only**
 
 ```bash
-# In your project directory
+# 1. Navigate to your project
+cd ~/your-project
+
+# 2. Create project skills directory
 mkdir -p .claude/skills
 
-# Copy each skill directory
+# 3. Copy skill directories (not symlink, since project-specific)
 cp -r /path/to/dev-suite-claude-skills/product-research .claude/skills/
 cp -r /path/to/dev-suite-claude-skills/technical-architecture .claude/skills/
 cp -r /path/to/dev-suite-claude-skills/software-development .claude/skills/
 cp -r /path/to/dev-suite-claude-skills/quality-engineering .claude/skills/
 
-# Verify installation
+# 4. Verify
 ls -la .claude/skills/
+# Should see 4 directories
 ```
 
-**Method C: Install as Personal Skills (All Projects)**
-
-```bash
-# Create personal skills directory (if it doesn't exist)
-mkdir -p ~/.claude/skills
-
-# Copy each skill directory
-cp -r /path/to/dev-suite-claude-skills/product-research ~/.claude/skills/
-cp -r /path/to/dev-suite-claude-skills/technical-architecture ~/.claude/skills/
-cp -r /path/to/dev-suite-claude-skills/software-development ~/.claude/skills/
-cp -r /path/to/dev-suite-claude-skills/quality-engineering ~/.claude/skills/
-
-# Verify installation
-ls -la ~/.claude/skills/
-```
+**When to use this:**
+- Testing skills before global installation
+- Project has unique skill requirements
+- Don't want skills in other projects
 
 ### Option 3: API Usage
 
@@ -188,44 +288,216 @@ Warnings:       0
 
 ## Troubleshooting
 
-### Skills Not Loading
+### Issue 1: Skills Not Loading
 
-**Symptom:** Claude doesn't seem to use the skills
+**Problem:** You ask Claude something but the skills don't seem to activate
+
+**How to tell:** The response is generic, doesn't mention using a specific skill
+
+**Example:**
+```
+You: "Research the task management market"
+Claude: [gives brief generic answer without deep market analysis]
+❌ Product Research skill didn't load
+```
 
 **Solutions:**
 
-1. **Verify installation location:**
-   ```bash
-   # For project skills
-   ls -la .claude/skills/
+**1. Verify installation:**
+```bash
+# For Claude.ai: Check the Skills panel shows your skills
 
-   # For personal skills
+# For Claude Code CLI (Global):
+ls -la ~/.claude/skills/ | grep dev-suite
+
+# For Claude Code CLI (Project):
+ls -la .claude/skills/
+
+# You should see the 4 skill directories
+```
+
+**2. Check the skills are valid:**
+```bash
+cd /path/to/dev-suite-claude-skills
+./scripts/validate-skills.sh
+
+# Should show: ✅ All 49 checks passed
+```
+
+**3. Try being more explicit:**
+```
+Instead of: "Research task management"
+Try: "Using the product-research skill, conduct comprehensive market research on task management apps including competitive analysis"
+```
+
+**4. Restart Claude (CLI users):**
+```bash
+# Exit current session
+exit
+
+# Start fresh
+claude
+```
+
+**5. Check frontmatter has trigger keywords:**
+```bash
+head -5 product-research/SKILL.md
+
+# Should show:
+# ---
+# name: product-research
+# description: Conduct comprehensive product research including...
+# ---
+```
+
+---
+
+### Issue 2: "Permission Denied" When Running Scripts
+
+**Problem:** Can't execute `./scripts/validate-skills.sh`
+
+**Error message:**
+```
+-bash: ./scripts/validate-skills.sh: Permission denied
+```
+
+**Solution:**
+```bash
+# Make the script executable
+chmod +x scripts/validate-skills.sh
+
+# Now run it
+./scripts/validate-skills.sh
+```
+
+---
+
+### Issue 3: Symlinks Not Working (Windows)
+
+**Problem:** Symlinks fail on Windows
+
+**Error message:**
+```
+ln: failed to create symbolic link: Operation not supported
+```
+
+**Solution:** Use copying instead of symlinking
+```bash
+# Instead of ln -s, use cp -r
+mkdir -p ~/.claude/skills
+cp -r product-research ~/.claude/skills/
+cp -r technical-architecture ~/.claude/skills/
+cp -r software-development ~/.claude/skills/
+cp -r quality-engineering ~/.claude/skills/
+```
+
+**Note:** With copying, you'll need to manually update if you pull changes from the repo.
+
+---
+
+### Issue 4: ZIP Upload Fails
+
+**Problem:** ZIP file won't upload to Claude.ai
+
+**Possible causes:**
+1. File too large
+2. Includes unnecessary files
+
+**Solution:**
+```bash
+# Create a clean ZIP excluding large/unnecessary files
+zip -r dev-suite-skills.zip . \
+  -x "*.git*" \
+  -x ".claude-memory/session/*" \
+  -x "node_modules/*" \
+  -x ".DS_Store" \
+  -x "*.log"
+
+# Check the size
+ls -lh dev-suite-skills.zip
+# Should be under 5MB
+```
+
+---
+
+### Issue 5: Skills Activate But Responses Seem Wrong
+
+**Problem:** Skills load but outputs don't match documentation
+
+**Diagnosis:**
+```bash
+# Check which version you have
+git log --oneline -1
+
+# Update to latest
+git pull origin main
+
+# Validate
+./scripts/validate-skills.sh
+```
+
+**For Claude.ai users:** Re-create and re-upload the ZIP after updating
+
+**For CLI users with symlinks:** Skills auto-update, just restart Claude
+
+---
+
+### Issue 6: Can't Find Skills Directory
+
+**Problem:** `~/.claude/skills/` doesn't exist
+
+**Solution:**
+```bash
+# Create it
+mkdir -p ~/.claude/skills
+
+# Verify
+ls -la ~/.claude/skills
+
+# Should show an empty directory ready for skills
+```
+
+---
+
+### Issue 7: Multiple Skills Seem to Conflict
+
+**Problem:** Claude uses multiple skills at once causing confusion
+
+**This is normal!** Skills augment Claude's knowledge - they don't replace it. Claude can use multiple skills together when appropriate.
+
+**Example (intended behavior):**
+```
+You: "Build a task app from scratch"
+Claude: [Uses Research + Architecture + Development + QE skills together]
+✅ This is correct - comprehensive workflow
+```
+
+**If you want only one skill:**
+```
+You: "Using ONLY the technical-architecture skill, design..."
+```
+
+---
+
+### Still Having Issues?
+
+1. **Check GitHub Issues:** https://github.com/mevans2120/dev-suite-claude-skills/issues
+2. **Run full diagnostics:**
+   ```bash
+   # Validate skills
+   ./scripts/validate-skills.sh
+
+   # Check installation
    ls -la ~/.claude/skills/
 
-   # For plugins
-   claude plugin list
+   # Check versions
+   git log --oneline -5
    ```
-
-2. **Check skill format:**
-   ```bash
-   ./scripts/validate-skills.sh
-   ```
-
-3. **Try explicit skill invocation:**
-   ```
-   Using the product-research skill, help me analyze...
-   ```
-
-4. **Ensure descriptions include trigger keywords:**
-   - Each skill's description includes keywords Claude uses for matching
-   - Check frontmatter in SKILL.md files
-
-5. **Restart Claude (if using CLI):**
-   ```bash
-   # Exit and restart
-   exit
-   claude
-   ```
+3. **Open a new issue** with:
+   - Your installation method (Claude.ai, CLI, etc.)
+   - Error messages (full text)
+   - Output of `./scripts/validate-skills.sh`
+   - Steps you've already tried
 
 ### File Permission Errors
 

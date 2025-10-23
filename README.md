@@ -2,14 +2,22 @@
 
 A comprehensive skill suite for AI-driven digital product development, covering the full development lifecycle from research to quality engineering.
 
+## What are Claude Skills?
+
+Claude Skills extend Claude's capabilities with specialized knowledge and workflows. When you install this skill suite, Claude automatically loads the relevant skill based on your request. For example, asking for "market research" loads the Research skill, while "implement a feature" loads the Development skill.
+
+**Think of skills as expert consultants** - each one brings deep expertise in a specific area of product development.
+
 ## Overview
 
 This skill suite provides four specialized skills that work together to enable high-quality digital product development:
 
-1. **Research** - Market analysis, competitive research, and technology evaluation
-2. **Planning (Technical Architecture)** - System design, architecture decisions, and technology stack recommendations
-3. **Development** - Software implementation with best practices, focusing on React/TypeScript/Next.js and Python
+1. **Product Research** - Market analysis, competitive research, and technology evaluation
+2. **Technical Architecture** - System design, architecture decisions, and technology stack recommendations
+3. **Software Development** - Implementation with best practices for React/TypeScript/Next.js and Python
 4. **Quality Engineering** - Comprehensive testing strategy and implementation
+
+**Perfect for:** Solo developers, small teams, startups, and anyone building digital products with AI assistance.
 
 ## Skills
 
@@ -96,40 +104,54 @@ These skills are optimized for the following modern, AI-friendly technology stac
 
 ## Installation
 
-**Quick Install:**
-1. Download/clone this repository
-2. Run `./scripts/validate-skills.sh` to verify
-3. Follow platform-specific instructions below
+### Prerequisites
+- Claude Pro, Team, or Enterprise subscription
+- 5 minutes to install
 
-**Detailed Instructions:** See [INSTALL.md](INSTALL.md) for complete installation guide.
+### Quick Start (3 Steps)
 
-### Option 1: Claude.ai Web/Desktop (Easiest)
-
+**1. Get the skills:**
 ```bash
-# Create ZIP file
+git clone https://github.com/mevans2120/dev-suite-claude-skills.git
+cd dev-suite-claude-skills
+```
+
+**2. Verify they're valid:**
+```bash
+./scripts/validate-skills.sh
+# Should show: ✅ All 49 checks passed
+```
+
+**3. Install (choose your platform):**
+
+**For Claude.ai Web/Desktop** (Easiest):
+```bash
+# Create a ZIP
 zip -r dev-suite-skills.zip . -x "*.git*" -x ".claude-memory/*"
 
-# Upload via Claude.ai Skills interface
+# Then in Claude.ai:
+# 1. Click the Skills icon (puzzle piece)
+# 2. Click "Upload Skill"
+# 3. Select dev-suite-skills.zip
 ```
 
-### Option 2: Claude Code CLI
-
+**For Claude Code CLI** (Most powerful):
 ```bash
-# As plugin (available across all projects)
-claude plugin add /path/to/dev-suite-claude-skills
+# Install globally (all projects - RECOMMENDED)
+mkdir -p ~/.claude/skills
+ln -s "$(pwd)/product-research" ~/.claude/skills/product-research
+ln -s "$(pwd)/technical-architecture" ~/.claude/skills/technical-architecture
+ln -s "$(pwd)/software-development" ~/.claude/skills/software-development
+ln -s "$(pwd)/quality-engineering" ~/.claude/skills/quality-engineering
 
-# As project skills (specific project)
-cp -r /path/to/dev-suite-claude-skills/* .claude/skills/
-
-# As personal skills (all your projects)
-cp -r /path/to/dev-suite-claude-skills/* ~/.claude/skills/
+# Verify
+ls -la ~/.claude/skills/ | grep -E "product-research|technical-architecture|software-development|quality-engineering"
 ```
 
-### Option 3: API Usage
+**That's it!** Start a new Claude conversation and try:
+> "Research the market for task management apps"
 
-Skills uploaded to your Claude.ai account are automatically available in API calls.
-
-**For complete installation instructions and troubleshooting, see [INSTALL.md](INSTALL.md).**
+**For detailed instructions, troubleshooting, and all installation options, see [INSTALL.md](INSTALL.md).**
 
 ## Usage Examples
 
