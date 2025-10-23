@@ -1,5 +1,6 @@
-# Claude Memory (auto-managed, not tracked)
-.claude-memory/
+# Claude Memory - Track knowledge, ignore session state
+.claude-memory/session/
+.claude-memory/.DS_Store
 
 # Node modules (if any)
 node_modules/
